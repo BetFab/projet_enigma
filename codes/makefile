@@ -6,8 +6,7 @@ CFLAGS = -Wall -Wextra -pedantic -ansi
 #liste des fichiers objets
 OBJ = fonctions.o chiffrage.o
 
-chiffrage : $(OBJ)
-	$(CC) -o chiffrage
+
 
 fonctions.o: fonctions.h fonctions.c
 	$(CC) -c fonctions.c $(CFLAGS)
@@ -15,7 +14,8 @@ fonctions.o: fonctions.h fonctions.c
 chiffrage.o : chiffrage.c fonctions.h fonctions.c
 	$(CC) -c chiffrage.c $(CFLAGS)
 
+chiffrage : $(OBJ)
+	$(CC) $(OBJ) -o chiffrage
+
 clean:
 	rm -f *.o core
-mrproper: clean
-	rm -f chiffrage

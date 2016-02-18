@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "fonctions.h"
 
 int main()
 {
@@ -15,9 +16,14 @@ int main()
    char * reflecteurA = "EJMZALYXVBWFCRQUONTSPIKHGD";
    char * reflecteurB = "YRUHQSLDPXNGOKMIEBFZCWVJAT" ;
 
-   char * lettre = "J";
+   char lettre = 'D';
+   char lettrechiffree ;
 
-
+   /*
+   printf("%c %d \n", lettreChiffree(rotor1, lettre), lettreChiffree(rotor1, lettre));
+   lettrechiffree = cablageInverse(rotor1, lettreChiffree(rotor1, lettre));
+   printf("%c\n", lettrechiffree);
+   */
 
    return 0;
 }
