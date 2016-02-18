@@ -3,6 +3,7 @@
 #include "fonctions.h"
 
 
+
 int cablageInverse (char * cablage, char lettre)
 {
   int i ;
