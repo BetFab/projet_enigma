@@ -1,17 +1,19 @@
+# compilateur
 CC = gcc
+# options de compilation
 CFLAGS = -Wall -Wextra -pedantic -ansi
 
+#liste des fichiers objets
+OBJ = fonctions.o chiffrage.o
 
-all : chiffrage
-
-chiffrage: chiffrage.o fonctions.o
-	$(CC) -o
+chiffrage : $(OBJ)
+	$(CC) -o chiffrage
 
 fonctions.o: fonctions.h fonctions.c
-	$(CC) $(CFLAGS)
+	$(CC) -c fonctions.c $(CFLAGS)
 
-chiffrage.o: chiffrage.c
-	$(CC) $(CFLAGS)
+chiffrage.o : chiffrage.c fonctions.h fonctions.c
+	$(CC) -c chiffrage.c $(CFLAGS)
 
 clean:
 	rm -f *.o core
