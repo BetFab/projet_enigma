@@ -1,28 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <ctype.h>
 
-int accent(char c,char tab[11]) /*retourne 1 si le caractËre n'appartient pas ‡ la chaine, 0 sinon*/
+int indice_occur(char c,char tab[12]) /*on s'y appuiera pour d√©terminer si une lettre est accentu√©e ou pas*/
 {
-    int res=1; int i=0;
-    while((i<11) && (res!=0))
+    int i=0; int indice=-1;
+    char cour=tab[i];
+    while((i<11)&&(indice<0))
     {
-        if (tab[i]==c) res=0;
+		
+        if (cour==c) indice=i;
         i++;
     }
-    return res;
+    return indice;
 }
-void correction()
+void correction(FILE* fichier, char tab[12], char tab_c[12])
 {
-    FILE* fichier=NULL;
-    int caractere=0;
-    char tab={'‡','‰','È','Ë','Î','Í','Ó','Ô','˘','¸','˚'};
-    fichier=fopen("message.txt","r+");
-    if (fichier!=NULL){
-        do
+    
+    char caractere; int indice;
+      
+      do
         {
-            caractere=fgetc(fichier); /*On se place sur le caractËre courant*/
-            if (!accent(caractere,tab)) /*ce n'est pas une lettre accentuÈe*/
+            caractere=fgetc(fichier); /*On se place sur le caract√®re courant*/
+            if (indice_occur(caractere,tab)<0) /*ce n'est pas une lettre accentu√©e*/
             {
                 if isupper(caractere)/*la lettre est majuscule*/
                 {
@@ -31,9 +32,25 @@ void correction()
             }
             else
             {
-                    /*Fonction ‡ dÈfinir pour les accents*/
+				indice=indice_occur(caractere,tab);
+                caractere=tab_c[indice];/*On matche la lettre avec celle non accentu√©e*/
             }
 
-    }
+        } while (fgetc(fichier)!=EOF);
 
 }
+ int main(int argc, char* argv[])
+ {
+	 FILE* fichier=NULL;
+	 char tab[]={'√†','√§','√©','√®','√´','√™','√Æ','√Ø','√π','√º','√ª'};
+     char tab_c[]={'a','a','e','e','e','e','i','i','u','u','u'}; /* √† priori on utlise l'indice d'occurance jusqu'√† trouver une meilleure sol */
+	 
+	 if (argc >1){
+			fichier=fopen(argv[1],"r+");
+		}
+	 if (fichier){
+			correction(fichier,tab,tab_c);
+		}
+		fclose(fichier);
+	 return 0;
+ }
