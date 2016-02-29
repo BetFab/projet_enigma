@@ -43,7 +43,7 @@ void correction(FILE* fichier, char tab[12], char tab_c[12])
  {
 	 FILE* fichier=NULL;
 	 char tab[]={'à','ä','é','è','ë','ê','î','ï','ù','ü','û'};
-     char tab_c[]={'a','a','e','e','e','e','i','i','u','u','u'}; /* à priori on utlise l'indice d'occurance jusqu'à trouver une meilleure sol */
+         char tab_c[]={'a','a','e','e','e','e','i','i','u','u','u'}; /* à priori on utlise l'indice d'occurance jusqu'à trouver une meilleure sol */
 	 
 	 if (argc >1){
 			fichier=fopen(argv[1],"r+");
