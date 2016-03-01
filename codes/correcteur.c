@@ -3,23 +3,35 @@
 #include <string.h>
 #include <ctype.h>
 
-int indice_occur(char c,char tab[12]) /*on s'y appuiera pour déterminer si une lettre est accentuée ou pas*/
+
+int indice_occur(char c,char * tab) /*on s'y appuiera pour déterminer si une lettre est accentuée ou pas*/
 {
-    int i=0; int indice=-1;
-    char cour=tab[i];
-    while((i<11)&&(indice<0))
+    int      i = 0;
+    int      indice = -1;
+    char     cour = tab[i];
+
+    while( (i<11) && (indice<0) )
     {
-		
-        if (cour==c) indice=i;
+        printf("%c %c %d \n", cour, c, indice);
+        printf("%d \n", cour==c); /* ici ça marche pas, test à changer */
+        if (cour == c)
+        {
+          indice = i;
+        }
         i++;
     }
     return indice;
 }
+
+
+
+
+
 void correction(FILE* fichier, char tab[12], char tab_c[12])
 {
-    
+
     char caractere; int indice;
-      
+
       do
         {
             caractere=fgetc(fichier); /*On se place sur le caractère courant*/
@@ -39,12 +51,22 @@ void correction(FILE* fichier, char tab[12], char tab_c[12])
         } while (fgetc(fichier)!=EOF);
 
 }
+
+
+
+
+
  int main(int argc, char* argv[])
  {
 	 FILE* fichier=NULL;
-	 char tab[]={'à','ä','é','è','ë','ê','î','ï','ù','ü','û'};
-         char tab_c[]={'a','a','e','e','e','e','i','i','u','u','u'}; /* à priori on utlise l'indice d'occurance jusqu'à trouver une meilleure sol */
-	 
+   char * tab = "àäéèëêîïùüû";
+   char * tab_c = "aaeeeeiiuuu";/* à priori on utlise l'indice d'occurance jusqu'à trouver une meilleure sol */
+
+   /* ----- TEST DE CORRECTION ---- */
+
+   printf("%d \n",indice_occur(tab[4], tab));
+
+  /*
 	 if (argc >1){
 			fichier=fopen(argv[1],"r+");
 		}
@@ -52,5 +74,7 @@ void correction(FILE* fichier, char tab[12], char tab_c[12])
 			correction(fichier,tab,tab_c);
 		}
 		fclose(fichier);
+  */
+
 	 return 0;
  }

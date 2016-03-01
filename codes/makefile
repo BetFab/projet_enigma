@@ -7,6 +7,8 @@ CFLAGS = -Wall -Wextra -pedantic -ansi
 OBJ = fonctions.o chiffrage.o
 
 
+chiffrage : $(OBJ)
+	$(CC) $(OBJ) -o chiffrage $(CFLAGS)
 
 fonctions.o: fonctions.h fonctions.c
 	$(CC) -c fonctions.c $(CFLAGS)
@@ -14,8 +16,7 @@ fonctions.o: fonctions.h fonctions.c
 chiffrage.o : chiffrage.c fonctions.h fonctions.c
 	$(CC) -c chiffrage.c $(CFLAGS)
 
-chiffrage : $(OBJ)
-	$(CC) $(OBJ) -o chiffrage
+
 
 clean:
 	rm -f *.o core

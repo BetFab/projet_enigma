@@ -24,6 +24,6 @@ int main()
    lettrechiffree = cablageInverse(rotor1, lettreChiffree(rotor1, lettre));
    printf("%c\n", lettrechiffree);
    */
-
+   printf('é');
    return 0;
 }
