@@ -6,6 +6,7 @@ CFLAGS = -Wall -Wextra -pedantic -ansi
 #liste des fichiers objets
 OBJ = fonctions.o chiffrage.o
 
+all : chiffrage correcteur
 
 chiffrage : $(OBJ)
 	$(CC) $(OBJ) -o chiffrage $(CFLAGS)
@@ -16,6 +17,11 @@ fonctions.o: fonctions.h fonctions.c
 chiffrage.o : chiffrage.c fonctions.h fonctions.c
 	$(CC) -c chiffrage.c $(CFLAGS)
 
+correcteur : correcteur.o
+	$(CC) correcteur.o -o correcteur $(CFLAGS)
+
+correcteur.o : correcteur.c
+	$(CC) -c correcteur.c $(CFLAGS)
 
 
 clean:
