@@ -56,18 +56,22 @@ int main()
    l1 = lettreChiffree(rotor1, l1, decalageRotor1);
    l1 = lettreChiffree(rotor2, l1, decalageRotor2);
    l1 = lettreChiffree(rotor3, l1, decalageRotor3);
+   l1 = lettreChiffree(reflecteurA, l1, 0);
+   l1 = cablageInverse(rotor1, lettreChiffree(rotor1, l1));
    rotationRotor( nbFrappes, &decalageRotor1, &decalageRotor2, &decalageRotor3, indicePositionEncocheRotors ,indicePositionInitialeRotors)
 
    nbFrappes++;
    l2 = lettreChiffree(rotor1, l2, decalageRotor1);
    l2 = lettreChiffree(rotor2, l2, decalageRotor2);
    l2 = lettreChiffree(rotor3, l2, decalageRotor3);
+   l2 = lettreChiffree(reflecteurA, l1, 0);
    rotationRotor( nbFrappes, &decalageRotor1, &decalageRotor2, &decalageRotor3, indicePositionEncocheRotors ,indicePositionInitialeRotors)
 
    nbFrappes++;
    l3 = lettreChiffree(rotor1, l3, decalageRotor1);
    l3 = lettreChiffree(rotor2, l3, decalageRotor2);
    l3 = lettreChiffree(rotor3, l3, decalageRotor3);
+   l1 = lettreChiffree(reflecteurA, l1, 0);
    rotationRotor( nbFrappes, &decalageRotor1, &decalageRotor2, &decalageRotor3, indicePositionEncocheRotors ,indicePositionInitialeRotors)
 
    /* ETAPE 1 convertir les lettres en indices de leur position dans l'alphabet */
