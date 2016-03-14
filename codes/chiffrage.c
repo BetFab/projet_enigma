@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include "fonctions.h"
 
-
+/*#define DEBUG 0*/
+  #define DEBUG 1
 
 
 
@@ -25,9 +26,9 @@ int main()
    char         lettre = 'D';
    char         lettrechiffree ;
 
-   int       * choixRotors = {1 , 2 , 3};
-   char      * positionIntialeRotors{'O' , 'Y' , 'H'}; /* clé du jour */
-   int       * indicePositionInitialeRotors{12, 21, 3}; /* fonction à implementer /!\ */
+   int         choixRotors[3] = {1 , 2 , 3};
+   char        positionIntialeRotors[3] = {'O' , 'Y' , 'H'}; /* clé du jour */
+   int         indicePositionInitialeRotors[3] = {12, 21, 3}; /* fonction à implementer /!\ */
 
    /* On stock l'indice de départ des alphabets dans un tableau d'entier, cette indice
       est initialisée en paramètre par la position de départ, puis modifié par la
@@ -47,35 +48,58 @@ int main()
    int        decalageRotor2 = indicePositionInitialeRotors[1];
    int        decalageRotor3 = indicePositionInitialeRotors[3];
 
+
+
    /* On va essayer d'encrypter TES */
    char l1 = 'T';
    char l2 = 'E';
    char l3 = 'S';
+
+   if (DEBUG)
+   {
+     printf("l1: %c ", l1);
+     printf("l2: %c ", l2);
+     printf("l3: %c \n", l3);
+   }
 
    nbFrappes++ ;
    l1 = lettreChiffree(rotor1, l1, decalageRotor1);
    l1 = lettreChiffree(rotor2, l1, decalageRotor2);
    l1 = lettreChiffree(rotor3, l1, decalageRotor3);
    l1 = lettreChiffree(reflecteurA, l1, 0);
-   l1 = cablageInverse(rotor1, lettreChiffree(rotor1, l1));
-   rotationRotor( nbFrappes, &decalageRotor1, &decalageRotor2, &decalageRotor3, indicePositionEncocheRotors ,indicePositionInitialeRotors)
+   l1 = cablageInverse(rotor1, lettreChiffree(rotor1, l1,decalageRotor1));
+   rotationRotor( nbFrappes, &decalageRotor1, &decalageRotor2, &decalageRotor3, indicePositionEncocheRotors ,indicePositionInitialeRotors);
+
+   if (DEBUG)
+   {
+     printf("l1: %c ", l1);
+     printf("l2: %c ", l2);
+     printf("l3: %c \n", l3);
+   }
 
    nbFrappes++;
    l2 = lettreChiffree(rotor1, l2, decalageRotor1);
    l2 = lettreChiffree(rotor2, l2, decalageRotor2);
    l2 = lettreChiffree(rotor3, l2, decalageRotor3);
    l2 = lettreChiffree(reflecteurA, l1, 0);
-   rotationRotor( nbFrappes, &decalageRotor1, &decalageRotor2, &decalageRotor3, indicePositionEncocheRotors ,indicePositionInitialeRotors)
+   rotationRotor( nbFrappes, &decalageRotor1, &decalageRotor2, &decalageRotor3, indicePositionEncocheRotors ,indicePositionInitialeRotors);
+
+   if (DEBUG)
+   {
+     printf("l1: %c ", l1);
+     printf("l2: %c ", l2);
+     printf("l3: %c \n", l3);
+   }
 
    nbFrappes++;
    l3 = lettreChiffree(rotor1, l3, decalageRotor1);
    l3 = lettreChiffree(rotor2, l3, decalageRotor2);
    l3 = lettreChiffree(rotor3, l3, decalageRotor3);
    l1 = lettreChiffree(reflecteurA, l1, 0);
-   rotationRotor( nbFrappes, &decalageRotor1, &decalageRotor2, &decalageRotor3, indicePositionEncocheRotors ,indicePositionInitialeRotors)
+   rotationRotor( nbFrappes, &decalageRotor1, &decalageRotor2, &decalageRotor3, indicePositionEncocheRotors ,indicePositionInitialeRotors);
 
    /* ETAPE 1 convertir les lettres en indices de leur position dans l'alphabet */
-   /* ETAPE 2 à chaque fois que le rotor passe sur l'indice initiale
+   /* ETAPE 2 à chaque fois que le rotor passe sur l'indice mkaeinitiale
               -> incrementer le nombre de tour du rotor 1
               -> à chaque tour du rotor 1, le rotor 2 tourne
               -> à chaque 26 tour du rotor1, le rotor 2 a fait 1 tour

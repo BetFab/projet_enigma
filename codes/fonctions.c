@@ -34,17 +34,17 @@ void indexPositionDepart( char * rotor1, char * rotor2, char * rotor3 , char * l
      indices[2] = cablageInverse(rotor3, lettresDepart[2]) - 65;
 }
 
-void rotationRotor( int compteurFrappes, int * decR1, int * decR2, int * decR3, int * indiceEncoche int * positionInitRotors)
+void rotationRotor( int compteurFrappes, int * decR1, int * decR2, int * decR3, int * indiceEncoche, int * positionInitRotors)
 {
-    ((*decR1)++) % 26; /* le rotor1 tourne 1 fois */
+    *decR1 = ( *decR1 + 1) % 26; /* le rotor1 tourne 1 fois */
     if( ((positionInitRotors[0] - compteurFrappes)%26) ==  indiceEncoche[0] )
     {
         /* le rotor 2 tourne 1 fois */
-        ((*decR2)++) % 26;
+        *decR2 = (*decR2 + 1) % 26;
         if( ((positionInitRotors[1] - compteurFrappes)%26) ==  indiceEncoche[1] )
         {
           /* le rotor 3 tourne 1 fois */
-          ((*decR3)++) % 26;
+          *decR3 = (*decR3 + 1) % 26;
         }
     }
 }

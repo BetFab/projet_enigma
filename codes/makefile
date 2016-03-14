@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -pedantic -ansi
 #liste des fichiers objets
 OBJ = fonctions.o chiffrage.o
 
-all : chiffrage correcteur
+all : chiffrage correcteur clean
 
 chiffrage : $(OBJ)
 	$(CC) $(OBJ) -o chiffrage $(CFLAGS)
