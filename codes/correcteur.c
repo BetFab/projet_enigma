@@ -4,51 +4,41 @@
 #include <ctype.h>
 
 
-int indice_occur(char c,char * tab) /*on s'y appuiera pour dÃ©terminer si une lettre est accentuÃ©e ou pas*/
+int indice_occur(char c,char * tab) /*on s'y appuiera pour déterminer si une lettre est accentuée ou pas*/
 {
     int      i = 0;
     int      indice = -1;
-    char     cour = tab[i];
 
     while( (i<11) && (indice<0) )
     {
-        printf("%c %c %d \n", cour, c, indice);
-        printf("%d \n", cour==c); /* ici Ã§a marche pas, test Ã  changer */
-        if (cour == c)
-        {
-          indice = i;
-        }
+        if (tab[i] == c) indice = i;
         i++;
     }
     return indice;
 }
 
-
-
-
-
-void correction(FILE* fichier, char tab[12], char tab_c[12])
+void correction(FILE* source, FILE* dest,char tab[12], char tab_c[12])
 {
 
-    char caractere; int indice;
+    int caractere=0; int indice;
 
-      do
+    while ((caractere = fgetc(source))!= EOF )
         {
-            caractere=fgetc(fichier); /*On se place sur le caractÃ¨re courant*/
-            if (indice_occur(caractere,tab)<0) /*ce n'est pas une lettre accentuÃ©e*/
-            {
-                if isupper(caractere)/*la lettre est majuscule*/
+            if (indice_occur(caractere,tab)<0) /*ce n'est pas une lettre accentuée*/
+                {
+                if (isupper(caractere))/*la lettre est majuscule*/
                 {
                     caractere=tolower(caractere);/*on la transforme en miniscule*/
-                }
-            }
-            else
-            {
-				indice=indice_occur(caractere,tab);
-                caractere=tab_c[indice];/*On matche la lettre avec celle non accentuÃ©e*/
-            }
 
-        } while (fgetc(fichier)!=EOF);
+                }
+                }
+            else
+                {   indice=indice_occur(caractere,tab);
+                    caractere=tab_c[indice];/*On matche la lettre avec celle non accentuée*/
+                }
+            fprintf(dest, "%c", caractere);
+        }
+
 
 }
 
@@ -56,25 +46,18 @@ void correction(FILE* fichier, char tab[12], char tab_c[12])
 
 
 
- int main(int argc, char* argv[])
+ int main()
  {
-	 FILE* fichier=NULL;
-   char * tab = "Ã Ã¤Ã©Ã¨Ã«ÃªÃ®Ã¯Ã¹Ã¼Ã»";
-   char * tab_c = "aaeeeeiiuuu";/* Ã  priori on utlise l'indice d'occurance jusqu'Ã  trouver une meilleure sol */
+   FILE* dest = NULL;
+   FILE* source = NULL;
+   source = fopen("source.txt", "r");
+   dest = fopen("destination.txt", "a");
+   char * tab = "àäéèëêîïùüû";
+   char * tab_c = "aaeeeeiiuuu";/* à priori on utlise l'indice d'occurance jusqu'à trouver une meilleure sol */
 
    /* ----- TEST DE CORRECTION ---- */
-
-   printf("%d \n",indice_occur(tab[4], tab));
-
-  /*
-	 if (argc >1){
-			fichier=fopen(argv[1],"r+");
-		}
-	 if (fichier){
-			correction(fichier,tab,tab_c);
-		}
-		fclose(fichier);
-  */
-
-	 return 0;
+    if(source != NULL && dest != NULL) correction(source,dest,tab,tab_c);
+    fclose(source);
+    fclose(dest);
+    return 0;
  }
