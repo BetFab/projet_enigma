@@ -54,131 +54,42 @@ int main()
    char l2 = 'C';
    char l3 = 'H';
 
+   int l1_i, l2_i, l3_i;
+
+   /* transformation des lettres en indices / testé*/
+   l1_i = l1-65;
+   l2_i = l2-65;
+   l3_i = l3-65 ;
+
+
    if(DEBUG)
    {
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-     printf("décalage Rotor : %d %d %d \n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
-     printf("nbrotation : %d %d %d \n", nbRotation[0], nbRotation[1], nbRotation[2]);
-     rotationRotor(&nbRotation, &decalageRotor);
-
-
+     printf("%d %d %d\n", l1_i, l2_i, l3_i);
    }
 
+   rotationRotor(&nbRotation, &decalageRotor );
+   /*APRES ROTOR1*/
+   /*lettre reellement codée */
+   l1_i = (indicePositionInitialeRotors[0] + nbRotation[0] + l1_i)%26;
+   if(DEBUG) printf("lettre reellement codée : %d \n", l1_i);
+   /* passage dans le cablage */
+   l1_i = rotor3[l1_i] - 65; /* implementer une fonction après les tests */
+   if(DEBUG) printf("lettre codée : %d \n", l1_i);
+   /* APRES ROTOR 2*/
+   l1_i = (l1_i - nbRotation[0] - indicePositionInitialeRotors[0] +indicePositionInitialeRotors[1] + nbRotation[1])%26;
+   if(DEBUG) printf("lettre reellement codée : %d \n", l1_i);
+   l1_i = rotor2[l1_i] - 65; /* implementer une fonction après les tests */
+   if(DEBUG) printf("lettre codée : %d \n", l1_i);
+   /* APRES ROTOR 3*/
+   l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[2] + nbRotation[2])%26;
+   if(DEBUG) printf("lettre reellement codée : %d \n", l1_i);
+   l1_i = rotor1[l1_i] - 65; /* implementer une fonction après les tests */
+   if(DEBUG) printf("lettre codée : %d \n", l1_i);
+
+
+   /* JUSQUE LA C'EST BON! */
+   /*Ensuite il faut passer par le réflecteur (simple)*/
+   /* puis faire les cablages inverses */
+      
    return 0;
 }
