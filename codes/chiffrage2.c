@@ -3,7 +3,6 @@
 #include "fonctions.h"
 
 #define DEBUG 1
-/*#define DEBUG 1*/
 
 /* tableau des correspondances indice de l'alphabet/lettre */
 /* A B C D E F G H I J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z */
@@ -122,7 +121,7 @@ if (DEBUG) printf("%c %d ",l1, decalageRotor2);
    }
 
   nbFrappes++;
-  decalageRotor1+=1;
+  decalageRotor1+=1; /* ça compile ça ? */
   l3 = lettreChiffree(rotor1, l3, decalageRotor1);
   if (DEBUG) printf("%c %d ",l3, decalageRotor1);
   l3 = lettreChiffree(rotor2, l3-3, decalageRotor2);

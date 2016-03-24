@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include "fonctions.h"
 
-#define DEBUG 0
-/*#define DEBUG 1*/
+
+#define DEBUG 1
 
 int cablageInverse (char * cablage, char lettre, int decalage) /* testée ok */
 {
@@ -12,8 +12,8 @@ int cablageInverse (char * cablage, char lettre, int decalage) /* testée ok */
   if(DEBUG) printf("%c %c\n", cablage[i%26], lettre);
   do {
     i++;
-    if(DEBUG) printf("%c %c\n", cablage[i%26], lettre);
-    i = i%26;
+    if(DEBUG) printf("%c %c\n", cablage[i%25], lettre);
+    i = i%25;
     if(cablage[i] == lettre)
     {
       trouve = 1;
@@ -44,17 +44,28 @@ void indexPositionDepart( char * rotor1, char * rotor2, char * rotor3 , char * l
      */
 }
 
-void rotationRotor( int compteurFrappes, int * decR1, int * decR2, int * decR3, int * indiceEncoche, int * positionInitRotors)
+void rotationRotor(int (*nbRot)[3], int (*dec)[3] ) /* quand cette fonction est appelée, on considère 1 frappe */ /* FONCTION TESTEE */
 {
-    *decR1 = ( *decR1 + 1) % 26; /* le rotor1 tourne 1 fois */
-    if( ((positionInitRotors[0] - compteurFrappes)%26) ==  indiceEncoche[0] )
+  int * nbRotation = *nbRot;
+  int * decalageRotor = *dec;
+
+    /* le rotor 1 tourne à chaque fois */
+    (decalageRotor)[0] = (decalageRotor)[0] + 1;
+    (nbRotation)[0] = ((nbRotation)[0] + 1)%26; /* à tester */
+        /* si on est à un multiple de 26 -> le rotor 2 tourne */
+
+    if (decalageRotor[0]%26 == 0)
     {
-        /* le rotor 2 tourne 1 fois */
-        *decR2 = (*decR2 + 1) % 26;
-        if( ((positionInitRotors[1] - compteurFrappes)%26) ==  indiceEncoche[1] )
-        {
-          /* le rotor 3 tourne 1 fois */
-          *decR3 = (*decR3 + 1) % 26;
-        }
+
+      decalageRotor[1] = decalageRotor[1] + 1;
+      nbRotation[1] = (nbRotation[1] + 1)%26; /* à tester */
+
+      /* seulement si le second rotor à tourner, on regarde si le troisième rotor doit lui aussi tourner */
+      if(decalageRotor[1]%26 == 0)
+      {
+        decalageRotor[2] = decalageRotor[2] + 1;
+        nbRotation[2] = (nbRotation[2] + 1)%26; /* à tester */
+
+      }
     }
 }
