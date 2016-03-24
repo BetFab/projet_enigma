@@ -28,8 +28,8 @@ int main()
    char       * reflecteurB = "YRUHQSLDPXNGOKMIEBFZCWVJAT" ;
 
    int        choixRotors[3] = {3 , 2 , 1};
-   char       positionIntialeRotors[3] = {'A' , 'A' , 'A'};
-   int        indicePositionInitialeRotors[3] = {0, 0, 0}; /* fonction à implementer /!\ */
+   char       positionIntialeRotors[3] = {'U' , 'D' , 'Y'};
+   int        indicePositionInitialeRotors[3] = {20, 3, 24}; /* fonction à implementer /!\ */
 
    /* On stock l'indice de départ des alphabets dans un tableau d'entier, cette indice
       est initialisée en paramètre par la position de départ, puis modifié par la
@@ -67,29 +67,20 @@ int main()
      printf("%d %d %d\n", l1_i, l2_i, l3_i);
    }
 
-   rotationRotor(&nbRotation, &decalageRotor );
-   /*APRES ROTOR1*/
-   /*lettre reellement codée */
-   l1_i = (indicePositionInitialeRotors[0] + nbRotation[0] + l1_i)%26;
-   if(DEBUG) printf("lettre reellement codée : %d \n", l1_i);
-   /* passage dans le cablage */
-   l1_i = rotor3[l1_i] - 65; /* implementer une fonction après les tests */
-   if(DEBUG) printf("lettre codée : %d \n", l1_i);
-   /* APRES ROTOR 2*/
-   l1_i = (l1_i - nbRotation[0] - indicePositionInitialeRotors[0] +indicePositionInitialeRotors[1] + nbRotation[1])%26;
-   if(DEBUG) printf("lettre reellement codée : %d \n", l1_i);
-   l1_i = rotor2[l1_i] - 65; /* implementer une fonction après les tests */
-   if(DEBUG) printf("lettre codée : %d \n", l1_i);
-   /* APRES ROTOR 3*/
-   l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[2] + nbRotation[2])%26;
-   if(DEBUG) printf("lettre reellement codée : %d \n", l1_i);
-   l1_i = rotor1[l1_i] - 65; /* implementer une fonction après les tests */
-   if(DEBUG) printf("lettre codée : %d \n", l1_i);
+  rotationRotor(&nbRotation, &decalageRotor );
+  l1_i =  frappe(l1_i /*lettre*/, indicePositionInitialeRotors, nbRotation,  decalageRotor, rotor1, rotor2,  rotor3, reflecteurB);
+  printf("%c", l1_i + 65);
+  rotationRotor(&nbRotation, &decalageRotor );
+  l2_i =  frappe(l2_i , indicePositionInitialeRotors, nbRotation,  decalageRotor, rotor1, rotor2,  rotor3, reflecteurB);
+  printf("%c", l2_i + 65);
+  rotationRotor(&nbRotation, &decalageRotor );
+  l3_i =  frappe(l3_i , indicePositionInitialeRotors, nbRotation,  decalageRotor, rotor1, rotor2,  rotor3, reflecteurB);
+  printf("%c\n", l3_i + 65);
 
 
    /* JUSQUE LA C'EST BON! */
    /*Ensuite il faut passer par le réflecteur (simple)*/
    /* puis faire les cablages inverses */
-      
+
    return 0;
 }
