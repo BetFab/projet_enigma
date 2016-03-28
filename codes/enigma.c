@@ -7,6 +7,8 @@
 /* A B C D E F G H I J  K  L  M  N  O  P  Q  R  S  T  U  V  W  X  Y  Z */
 /* 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 */
 
+#define DEBUG 1
+
 int main()
 {
 
@@ -23,6 +25,7 @@ int main()
   char       * reflecteurB = "YRUHQSLDPXNGOKMIEBFZCWVJAT" ;
 
   FILE       * fichier;
+  FILE       * fichier2;
 
   int         choixRotors[3] = {0 , 0 , 0};
   char        choixRotor1[26];
@@ -165,9 +168,10 @@ int main()
   /* --------------------------------------------------------------------- */
 
   fscanf(fichier, "%c %c %c", &positionIntialeRotors[0], &positionIntialeRotors[1], &positionIntialeRotors[2] );
-  while ((c = fgetc(fichier)) != '\n' && c != EOF);
+  while ((c = fgetc(fichier)) != '\n' );
   if(DEBUG) printf("%c %c %c\n", positionIntialeRotors[0], positionIntialeRotors[1],positionIntialeRotors[2] );
   lettre_indice(positionIntialeRotors, &indicePositionInitialeRotors);
+  if(DEBUG) printf("%d %d %d\n", indicePositionInitialeRotors[0], indicePositionInitialeRotors[1],indicePositionInitialeRotors[2] );
 
 
   /* --------------------------------------------------------------------- */
@@ -175,14 +179,31 @@ int main()
   /* --------------------------------------------------------------------- */
 
   fscanf(fichier, "%[^\n]s", tableau_fiche);
+  while ((c = fgetc(fichier)) != '\n');
   if(DEBUG) printf("%s\n", tableau_fiche);
 
   creation_fiches(tableau_fiche, &fiche1, &fiche2);
-  if (DEBUG) printf("%d", fiche1[2]);;
 
   decalageRotor[0] = - indicePositionEncocheRotors[0] + indicePositionInitialeRotors[0] ;
   decalageRotor[1] = - indicePositionEncocheRotors[1] + indicePositionInitialeRotors[1] ;
   decalageRotor[2] = - indicePositionEncocheRotors[2] + indicePositionInitialeRotors[2] ;
+
+  fichier2 = fopen("./texte_code.txt", "w");
+
+  while ((c = fgetc(fichier)) != EOF) /* Tant que fichier non vide */
+  {
+    if(DEBUG) printf("%c ", c);
+    if(c != 32) /* espace */
+    {
+      rotationRotor(&nbRotation, &decalageRotor);
+      if(DEBUG) printf("%d ", c);
+      c =  frappe(c , indicePositionInitialeRotors, nbRotation,  decalageRotor, choixRotor1, choixRotor2,  choixRotor3, choixReflecteur2, fiche1, fiche2)+65;
+      if(DEBUG) printf("%d ", c);
+    }
+    if(DEBUG) printf("%c \n", c);
+    fprintf(fichier2, "%c", c);
+  }
+  fclose(fichier2);
 
 
   free(tableau_fiche);

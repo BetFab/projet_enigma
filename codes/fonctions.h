@@ -1,6 +1,6 @@
 int cablageInverse (char * cablage, char lettre);
 
-int frappe(int l1_i /*lettre*/, int * indicePositionInitialeRotors, int * nbRotation, int * decalageRotor, char * rotor1, char * rotor2, char * rotor3, char * reflecteurB);
+int frappe(int l1_i /*lettre*/, int * indicePositionInitialeRotors, int * nbRotation, int * decalageRotor, char * rotor1, char * rotor2, char * rotor3, char * reflecteurB, int fiche1[10], int fiche2[10]);
 
 void rotationRotor(int (*nbRot)[3], int (*dec)[3] ) ;
 

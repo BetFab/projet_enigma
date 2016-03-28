@@ -4,7 +4,7 @@
 #include "fonctions.h"
 
 
-#define DEBUG 0
+#define DEBUG 1
 
 int cablageInverse (char * cablage, char lettre) /* testée ok */
 {
@@ -22,31 +22,63 @@ int cablageInverse (char * cablage, char lettre) /* testée ok */
   return(i);
 }
 
-int frappe(int l1_i /*lettre*/, int * indicePositionInitialeRotors, int * nbRotation, int * decalageRotor, char * rotor1, char * rotor2, char * rotor3, char * reflecteurB)
+int permutation_fiche(int fiche1[10], int fiche2[10], int lettre)
+{
+  int i;
+  int nouv_lettre = lettre;
+  for(i = 0; i<10 ; i++)
+  {
+    if(fiche1[i] == lettre) nouv_lettre = fiche2[i];
+    if(fiche2[i] == lettre) nouv_lettre = fiche1[i];
+  }
+  return nouv_lettre;
+}
+
+int frappe(int l1_i /*lettre*/, int * indicePositionInitialeRotors, int * nbRotation, int * decalageRotor, char * rotor1, char * rotor2, char * rotor3, char * reflecteurB, int fiche1[10], int fiche2[10])
 {
 
   /*APRES ROTOR1*/
   /*lettre reellement codée */
+  if (DEBUG) printf("FRAPPE %d \n",l1_i );
+  l1_i = permutation_fiche(fiche1, fiche2, l1_i-65);
+  if (DEBUG) printf("permutation %d \n",l1_i );
   l1_i = (indicePositionInitialeRotors[0] + nbRotation[0] + l1_i)%26;
+  if (DEBUG) printf("lettre réellement codée %d \n",l1_i );
   /* passage dans le cablage */
   l1_i = rotor3[l1_i] - 65; /* implementer une fonction après les tests */
+  if (DEBUG) printf("passage premier rotor %d \n",l1_i );
   /* APRES ROTOR 2*/
-  l1_i = (l1_i - nbRotation[0] - indicePositionInitialeRotors[0] +indicePositionInitialeRotors[1] + nbRotation[1] + 26)%26;
+  l1_i = (l1_i - nbRotation[0] - indicePositionInitialeRotors[0] +indicePositionInitialeRotors[1] + nbRotation[1] + (26*nbRotation[0]))%26;
+  if (DEBUG) printf("rellement %d \n",l1_i );
   l1_i = rotor2[l1_i] - 65; /* implementer une fonction après les tests */
+  if (DEBUG) printf("apres le deuxieme rotor %d \n",l1_i );
   /* APRES ROTOR 3*/
-  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[2] + nbRotation[2] +26 )%26;
+  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[2] + nbRotation[2] +(26*nbRotation[0]) )%26;
+  if (DEBUG) printf("%d rellement \n",l1_i );
   l1_i = rotor1[l1_i] - 65; /* implementer une fonction après les tests */
-  l1_i =( l1_i - nbRotation[2] - indicePositionInitialeRotors[2] + 26 )%26;
+  if (DEBUG) printf("%d apres le troisieme rotor \n",l1_i );
+  l1_i =( l1_i - nbRotation[2] - indicePositionInitialeRotors[2] + (26*nbRotation[0]))%26;
+  if (DEBUG) printf("%d rellement \n",l1_i );
   l1_i = reflecteurB[l1_i] - 65;
+  if (DEBUG) printf("reflecteur %d \n",l1_i );
 
   /* passage inverse rotor 3 */
   l1_i = (l1_i + indicePositionInitialeRotors[2] + nbRotation[2])%26;
+  if (DEBUG) printf("%d ",l1_i );
   l1_i = cablageInverse (rotor1, l1_i + 65);
-  l1_i = (l1_i - nbRotation[2] - indicePositionInitialeRotors[2] +indicePositionInitialeRotors[1] + nbRotation[1] +26 )%26;
+  if (DEBUG) printf("%d ",l1_i );
+  l1_i = (l1_i - nbRotation[2] - indicePositionInitialeRotors[2] +indicePositionInitialeRotors[1] + nbRotation[1] +(26*nbRotation[0]) )%26;
+  if (DEBUG) printf("%d ",l1_i );
   l1_i = cablageInverse (rotor2, l1_i + 65);
-  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[0] + nbRotation[0] +26 )%26;
+  if (DEBUG) printf("%d ",l1_i );
+  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[0] + nbRotation[0] +(26*nbRotation[0]) )%26;
+  if (DEBUG) printf("%d ",l1_i );
   l1_i = cablageInverse (rotor3, l1_i + 65);
-  l1_i = (l1_i - indicePositionInitialeRotors[0] - nbRotation[0] + 26)%26;
+  if (DEBUG) printf("%d ",l1_i );
+  /* il faut pas redécaler mais passer dans les fiches */
+  l1_i = (l1_i - indicePositionInitialeRotors[0] - nbRotation[0] + (26*nbRotation[0]))%26;
+  l1_i = permutation_fiche(fiche1, fiche2, l1_i);
+  if (DEBUG) printf("permutatino2:%d \n",l1_i );
 
   return(l1_i);
 }
@@ -56,7 +88,6 @@ void rotationRotor(int (*nbRot)[3], int (*dec)[3] ) /* quand cette fonction est 
   int * nbRotation = *nbRot;
   int * decalageRotor = *dec;
 
-    if (DEBUG) printf("decalage1: %d %d %d\n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
 
 
     if ((decalageRotor[1]+26)%26 == 0)
@@ -78,20 +109,9 @@ void rotationRotor(int (*nbRot)[3], int (*dec)[3] ) /* quand cette fonction est 
    decalageRotor[0] = decalageRotor[0] + 1;
    nbRotation[0] = (nbRotation[0] +1)%26;
 
-    if (DEBUG) printf("decalage2: %d %d %d\n", decalageRotor[0], decalageRotor[1], decalageRotor[2]);
 }
 
-int permutation_fiche(int fiche1[10], int fiche2[10], int lettre)
-{
-  int i;
-  int nouv_lettre;
-  for(i = 0; i<10 ; i++)
-  {
-    if(fiche1[i] == lettre) nouv_lettre = fiche2[i];
-    if(fiche2[i] == lettre) nouv_lettre = fiche1[i];
-  }
-  return nouv_lettre;
-}
+
 
 /* fonction création des listes de fiches correspondantes . Entrée: "AR TG BU JI KL MO PN YX WQ SD" Sortie: [0 5 6 4 8] [5 4 1 2 3]*/
 
@@ -111,10 +131,11 @@ void creation_fiches(char * tableau, int (*ptr_fiche1)[10], int (*ptr_fiche2)[10
 void lettre_indice(char lettre[3], int (*ptr_indice)[3])
 {
   int i ;
-  int taille = strlen(lettre);
+  int *liste = *ptr_indice;
 
-  for(i=0 ; i<taille; i++)
+
+  for(i=0 ; i<3; i++)
   {
-    (*ptr_indice)[i] = lettre[i] - 65;
+    liste[i] = lettre[i] - 65;
   }
 }
