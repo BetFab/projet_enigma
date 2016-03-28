@@ -1,12 +1,12 @@
 # compilateur
 CC = gcc
 # options de compilation
-CFLAGS = -Wall -Wextra -pedantic -ansi
+CFLAGS = -Wall -Wextra -pedantic -ansi -g
 
 #liste des fichiers objets
 OBJ = fonctions.o chiffrage.o
 
-all : chiffrage correcteur clean
+all : chiffrage correcteur enigma clean
 
 chiffrage : $(OBJ)
 	$(CC) $(OBJ) -o chiffrage $(CFLAGS)
@@ -22,6 +22,12 @@ correcteur : correcteur.o
 
 correcteur.o : correcteur.c
 	$(CC) -c correcteur.c $(CFLAGS)
+
+enigma : enigma.o fonctions.o
+	$(CC) enigma.o fonctions.o -o  enigma  $(CFLAGS)
+
+enigma.o : enigma.c fonctions.h fonctions.c
+	$(CC) -c enigma.c  $(CFLAGS)
 
 
 clean:

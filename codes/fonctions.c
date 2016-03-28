@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "fonctions.h"
 
 
@@ -104,5 +105,16 @@ void creation_fiches(char * tableau, int (*ptr_fiche1)[10], int (*ptr_fiche2)[10
   {
     fiche1[i] = tableau[3*i]-65;
     fiche2[i] = tableau[3*i+1]-65;
+  }
+}
+
+void lettre_indice(char lettre[3], int (*ptr_indice)[3])
+{
+  int i ;
+  int taille = strlen(lettre);
+
+  for(i=0 ; i<taille; i++)
+  {
+    (*ptr_indice)[i] = lettre[i] - 65;
   }
 }
