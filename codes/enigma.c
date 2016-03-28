@@ -60,7 +60,7 @@ int main()
 
   fscanf(fichier, "%d %d %d %c", &choixRotors[2], &choixRotors[1], &choixRotors[0], &choixReflecteur );
   while ((c = fgetc(fichier)) != '\n' && c != EOF);
-  printf("%d %d %d %c\n",choixRotors[2], choixRotors[1], choixRotors[0], choixReflecteur );
+  if(DEBUG) printf("%d %d %d %c\n",choixRotors[2], choixRotors[1], choixRotors[0], choixReflecteur );
   /* Cablage 3e rotor (le plus à gauche) */
   switch(choixRotors[2]) {
 
@@ -157,7 +157,7 @@ int main()
 
   fscanf(fichier, "%c %c %c", &positionEncocheRotors[0], &positionEncocheRotors[1], &positionEncocheRotors[2] );
   while ((c = fgetc(fichier)) != '\n' && c != EOF);
-  printf("%c %c %c\n", positionEncocheRotors[0], positionEncocheRotors[1], positionEncocheRotors[2]);
+  if(DEBUG) printf("%c %c %c\n", positionEncocheRotors[0], positionEncocheRotors[1], positionEncocheRotors[2]);
   lettre_indice(positionEncocheRotors, &indicePositionEncocheRotors);
 
   /* --------------------------------------------------------------------- */
@@ -166,7 +166,7 @@ int main()
 
   fscanf(fichier, "%c %c %c", &positionIntialeRotors[0], &positionIntialeRotors[1], &positionIntialeRotors[2] );
   while ((c = fgetc(fichier)) != '\n' && c != EOF);
-  printf("%c %c %c\n", positionIntialeRotors[0], positionIntialeRotors[1],positionIntialeRotors[2] );
+  if(DEBUG) printf("%c %c %c\n", positionIntialeRotors[0], positionIntialeRotors[1],positionIntialeRotors[2] );
   lettre_indice(positionIntialeRotors, &indicePositionInitialeRotors);
 
 
@@ -175,16 +175,16 @@ int main()
   /* --------------------------------------------------------------------- */
 
   fscanf(fichier, "%[^\n]s", tableau_fiche);
-  printf("%s\n", tableau_fiche);
+  if(DEBUG) printf("%s\n", tableau_fiche);
 
   creation_fiches(tableau_fiche, &fiche1, &fiche2);
-  printf("%d", fiche1[2]);
+  if (DEBUG) printf("%d", fiche1[2]);;
 
   decalageRotor[0] = - indicePositionEncocheRotors[0] + indicePositionInitialeRotors[0] ;
   decalageRotor[1] = - indicePositionEncocheRotors[1] + indicePositionInitialeRotors[1] ;
   decalageRotor[2] = - indicePositionEncocheRotors[2] + indicePositionInitialeRotors[2] ;
 
-  
+
   free(tableau_fiche);
   fclose(fichier);
   return 0;
