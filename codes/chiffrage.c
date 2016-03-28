@@ -43,9 +43,9 @@ int main()
 
    int       decalageRotor[3] ;
 
-   decalageRotor[0] = - indicePositionEncocheRotors[0] + indicePositionInitialeRotors[0] - 1;
-   decalageRotor[1] = - indicePositionEncocheRotors[1] + indicePositionInitialeRotors[1] - 1;
-   decalageRotor[2] = - indicePositionEncocheRotors[2] + indicePositionInitialeRotors[2] - 1;
+   decalageRotor[0] = - indicePositionEncocheRotors[0] + indicePositionInitialeRotors[0] ;
+   decalageRotor[1] = - indicePositionEncocheRotors[1] + indicePositionInitialeRotors[1] ;
+   decalageRotor[2] = - indicePositionEncocheRotors[2] + indicePositionInitialeRotors[2] ;
 
    int        nbRotation[3] = {0,0,0};
 
@@ -56,31 +56,35 @@ int main()
 
    int l1_i, l2_i, l3_i;
 
+   char* tableau_fiche = {"AZ ER TY UI OP QS DF GH JK LM"};
+   int fiche1[10];
+   int fiche2[10];
+   int c;
+
+   creation_fiches(tableau_fiche, &fiche1, &fiche2);
+   if(DEBUG)
+   {
+     printf("AFFICHAGE DU TABLEAU DE FICHE\n");
+     for(c= 0; c<10; c++)
+     {
+       printf("%d %d \n", fiche1[c], fiche2[c]);
+     }
+   }
+
    /* transformation des lettres en indices / testé*/
    l1_i = l1-65;
    l2_i = l2-65;
    l3_i = l3-65 ;
 
-
-   if(DEBUG)
-   {
-     printf("%d %d %d\n", l1_i, l2_i, l3_i);
-   }
-
+  printf("%c %c %c\n", l1_i+65, l2_i+65, l3_i+65);
   rotationRotor(&nbRotation, &decalageRotor );
   l1_i =  frappe(l1_i /*lettre*/, indicePositionInitialeRotors, nbRotation,  decalageRotor, rotor1, rotor2,  rotor3, reflecteurB);
-  printf("%c", l1_i + 65);
   rotationRotor(&nbRotation, &decalageRotor );
   l2_i =  frappe(l2_i , indicePositionInitialeRotors, nbRotation,  decalageRotor, rotor1, rotor2,  rotor3, reflecteurB);
-  printf("%c", l2_i + 65);
   rotationRotor(&nbRotation, &decalageRotor );
   l3_i =  frappe(l3_i , indicePositionInitialeRotors, nbRotation,  decalageRotor, rotor1, rotor2,  rotor3, reflecteurB);
-  printf("%c\n", l3_i + 65);
-
-
-   /* JUSQUE LA C'EST BON! */
-   /*Ensuite il faut passer par le réflecteur (simple)*/
-   /* puis faire les cablages inverses */
-
+  printf("%c %c %c\n", l1_i+65, l2_i+65, l3_i+65);
+  l1_i = permutation_fiche(fiche1, fiche2, l1_i);
+  if(DEBUG) printf("%c\n", l1_i+65);
    return 0;
 }
