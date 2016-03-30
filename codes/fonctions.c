@@ -39,46 +39,29 @@ int frappe(int l1_i /*lettre*/, int * indicePositionInitialeRotors, int * nbRota
 
   /*APRES ROTOR1*/
   /*lettre reellement codée */
-  if (DEBUG) printf("FRAPPE %d \n",l1_i );
   l1_i = permutation_fiche(fiche1, fiche2, l1_i-65);
-  if (DEBUG) printf("permutation %d \n",l1_i );
   l1_i = (indicePositionInitialeRotors[0] + nbRotation[0] + l1_i)%26;
-  if (DEBUG) printf("lettre réellement codée %d \n",l1_i );
   /* passage dans le cablage */
-  l1_i = rotor3[l1_i] - 65; /* implementer une fonction après les tests */
-  if (DEBUG) printf("passage premier rotor %d \n",l1_i );
+  l1_i = rotor1[l1_i] - 65; /* implementer une fonction après les tests */
   /* APRES ROTOR 2*/
   l1_i = (l1_i - nbRotation[0] - indicePositionInitialeRotors[0] +indicePositionInitialeRotors[1] + nbRotation[1] + (26*nbRotation[0]))%26;
-  if (DEBUG) printf("rellement %d \n",l1_i );
   l1_i = rotor2[l1_i] - 65; /* implementer une fonction après les tests */
-  if (DEBUG) printf("apres le deuxieme rotor %d \n",l1_i );
   /* APRES ROTOR 3*/
   l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[2] + nbRotation[2] +(26*nbRotation[0]) )%26;
-  if (DEBUG) printf("%d rellement \n",l1_i );
-  l1_i = rotor1[l1_i] - 65; /* implementer une fonction après les tests */
-  if (DEBUG) printf("%d apres le troisieme rotor \n",l1_i );
+  l1_i = rotor3[l1_i] - 65; /* implementer une fonction après les tests */
   l1_i =( l1_i - nbRotation[2] - indicePositionInitialeRotors[2] + (26*nbRotation[0]))%26;
-  if (DEBUG) printf("%d rellement \n",l1_i );
   l1_i = reflecteurB[l1_i] - 65;
-  if (DEBUG) printf("reflecteur %d \n",l1_i );
 
   /* passage inverse rotor 3 */
   l1_i = (l1_i + indicePositionInitialeRotors[2] + nbRotation[2])%26;
-  if (DEBUG) printf("%d ",l1_i );
-  l1_i = cablageInverse (rotor1, l1_i + 65);
-  if (DEBUG) printf("%d ",l1_i );
-  l1_i = (l1_i - nbRotation[2] - indicePositionInitialeRotors[2] +indicePositionInitialeRotors[1] + nbRotation[1] +(26*nbRotation[0]) )%26;
-  if (DEBUG) printf("%d ",l1_i );
-  l1_i = cablageInverse (rotor2, l1_i + 65);
-  if (DEBUG) printf("%d ",l1_i );
-  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[0] + nbRotation[0] +(26*nbRotation[0]) )%26;
-  if (DEBUG) printf("%d ",l1_i );
   l1_i = cablageInverse (rotor3, l1_i + 65);
-  if (DEBUG) printf("%d ",l1_i );
+  l1_i = (l1_i - nbRotation[2] - indicePositionInitialeRotors[2] +indicePositionInitialeRotors[1] + nbRotation[1] +(26*nbRotation[0]) )%26;
+  l1_i = cablageInverse (rotor2, l1_i + 65);
+  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[0] + nbRotation[0] +(26*nbRotation[0]) )%26;
+  l1_i = cablageInverse (rotor1, l1_i + 65);
   /* il faut pas redécaler mais passer dans les fiches */
   l1_i = (l1_i - indicePositionInitialeRotors[0] - nbRotation[0] + (26*nbRotation[0]))%26;
   l1_i = permutation_fiche(fiche1, fiche2, l1_i);
-  if (DEBUG) printf("permutatino2:%d \n",l1_i );
 
   return(l1_i);
 }
