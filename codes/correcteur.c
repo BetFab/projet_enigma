@@ -4,12 +4,12 @@
 #include <ctype.h>
 
 
-int indice_occur(char c,char * tab) /*on s'y appuiera pour déterminer si une lettre est accentuée ou pas*/
+int indice_occur(char c,char * tab)
 {
     int      i = 0;
     int      indice = -1;
 
-    while( (i<11) && (indice<0) )
+    while((indice<0)&& (i<14))
     {
         if (tab[i] == c) indice = i;
         i++;
@@ -17,24 +17,25 @@ int indice_occur(char c,char * tab) /*on s'y appuiera pour déterminer si une let
     return indice;
 }
 
-void correction(FILE* source, FILE* dest,char tab[12], char tab_c[12])
+void correction(FILE* source, FILE* dest,char tab[15], char tab_c[15])
 {
 
     int caractere=0; int indice;
 
     while ((caractere = fgetc(source))!= EOF )
         {
-            if (indice_occur(caractere,tab)<0) /*ce n'est pas une lettre accentuée*/
+            if (indice_occur(caractere,tab)<0)
                 {
-                if (isupper(caractere))/*la lettre est majuscule*/
+                if (islower(caractere))
                 {
-                    caractere=tolower(caractere);/*on la transforme en miniscule*/
+                    caractere=toupper(caractere);
 
                 }
                 }
             else
-                {   indice=indice_occur(caractere,tab);
-                    caractere=tab_c[indice];/*On matche la lettre avec celle non accentuée*/
+                {
+                    indice=indice_occur(caractere,tab);
+                    caractere=tab_c[indice];
                 }
             fprintf(dest, "%c", caractere);
         }
@@ -42,20 +43,14 @@ void correction(FILE* source, FILE* dest,char tab[12], char tab_c[12])
 
 }
 
-
-
-
-
  int main()
  {
-   FILE* dest = NULL;
-   FILE* source = NULL;
-   source = fopen("source.txt", "r");
-   dest = fopen("destination.txt", "a");
-   char * tab = "àäéèëêîïùüû";
-   char * tab_c = "aaeeeeiiuuu";/* à priori on utlise l'indice d'occurance jusqu'à trouver une meilleure sol */
-
-   /* ----- TEST DE CORRECTION ---- */
+    FILE* dest = NULL;
+    FILE* source = NULL;
+    char * tab = "Ã Ã¤Ã©Ã¨Ã«ÃªÃ®Ã¯Ã¹Ã¼Ã»Ã´Ã¶Ã§";
+    char * tab_c = "AAEEEEIIUUUOOC";
+    source = fopen("source.txt", "r");
+    dest = fopen("destination.txt", "a");
     if(source != NULL && dest != NULL) correction(source,dest,tab,tab_c);
     fclose(source);
     fclose(dest);
