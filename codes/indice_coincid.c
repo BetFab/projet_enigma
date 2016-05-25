@@ -1,39 +1,22 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
-void initialiser(int tab[26])
-{
-    int i;
-    for (i=0;i<26;i++)
-    {
-        tab[i]=0;
-    }
-}
-float calcul_indice_coincidence(int tab[26])
-{
-    int i,j;
-    int nb_lettres=0;
-    int nb_occurences=0;
-    float indice;
-    for (i=0;i<26;i++) nb_lettres+=tab[i];
-    for (j=0;j<26;j++)
-    {
-        nb_occurences = tab[j]*(tab[j]-1);
-        indice+=(float)nb_occurences/(nb_lettres * (nb_lettres-1));
-    }
+#include "fonctions.h"
 
-    return indice;
-}
-int main()
+#define SEUIL 0.6
+
+
+
+int indice_coincidence(char * fichier_entree)
 {
-    int j;
+    /*int j;*/
     int tab[26];
     float indice_coincid;
     int caractere_courant=0;
     int emplacement;
     FILE* test = NULL;
     initialiser(tab);
-    test = fopen("indice.txt", "r");
+    test = fopen(fichier_entree, "r");
     if (test!= NULL)
     {
        while ((caractere_courant = fgetc(test))!= EOF )
@@ -47,5 +30,5 @@ int main()
     }
     fclose(test);
 
-    return 0;
+    return indice_coincid;
 }
