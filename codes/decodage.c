@@ -50,20 +50,18 @@ int main()
             {
                   while(!(fin) && L1<='Z')
                   {
-
-                      fprintf(fichier,"%s B", ordre_rotor[o]);
+                      fprintf(fichier,"\r%s B\n", ordre_rotor[o]);
                       fscanf(fichier, "%s", encoche);
-                      fprintf(fichier, "\n%c%c%c\n", L1, L2, L3);
-                      printf("ok | ");
+                      fprintf(fichier, "\r%c%c%c", L1, L2, L3);
 
-
-                      /*fin = 1;*/
+                      fseek(fichier, 0, SEEK_SET);
 
                       L1++;
                   }
 
                   L2++;
                   L1 = 'A';
+                  fin = 1;
             }
 
             L3++;
