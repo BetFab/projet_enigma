@@ -44,23 +44,23 @@ int frappe(int l1_i /*lettre*/, int * indicePositionInitialeRotors, int * nbRota
   /* passage dans le cablage */
   l1_i = rotor1[l1_i] - 65; /* implementer une fonction après les tests */
   /* APRES ROTOR 2*/
-  l1_i = (l1_i - nbRotation[0] - indicePositionInitialeRotors[0] +indicePositionInitialeRotors[1] + nbRotation[1] + (26*nbRotation[0]))%26;
+  l1_i = (l1_i - nbRotation[0] - indicePositionInitialeRotors[0] +indicePositionInitialeRotors[1] + nbRotation[1] + (26*30))%26;
   l1_i = rotor2[l1_i] - 65; /* implementer une fonction après les tests */
   /* APRES ROTOR 3*/
-  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[2] + nbRotation[2] +(26*nbRotation[0]) )%26;
+  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[2] + nbRotation[2] +(26*30) )%26;
   l1_i = rotor3[l1_i] - 65; /* implementer une fonction après les tests */
-  l1_i =( l1_i - nbRotation[2] - indicePositionInitialeRotors[2] + (26*nbRotation[0]))%26;
+  l1_i =( l1_i - nbRotation[2] - indicePositionInitialeRotors[2] + (26*30))%26;
   l1_i = reflecteurB[l1_i] - 65;
 
   /* passage inverse rotor 3 */
   l1_i = (l1_i + indicePositionInitialeRotors[2] + nbRotation[2])%26;
   l1_i = cablageInverse (rotor3, l1_i + 65);
-  l1_i = (l1_i - nbRotation[2] - indicePositionInitialeRotors[2] +indicePositionInitialeRotors[1] + nbRotation[1] +(26*nbRotation[0]) )%26;
+  l1_i = (l1_i - nbRotation[2] - indicePositionInitialeRotors[2] +indicePositionInitialeRotors[1] + nbRotation[1] +(26*30) )%26;
   l1_i = cablageInverse (rotor2, l1_i + 65);
-  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[0] + nbRotation[0] +(26*nbRotation[0]) )%26;
+  l1_i = (l1_i - nbRotation[1] - indicePositionInitialeRotors[1] +indicePositionInitialeRotors[0] + nbRotation[0] +(26*30) )%26;
   l1_i = cablageInverse (rotor1, l1_i + 65);
   /* il faut pas redécaler mais passer dans les fiches */
-  l1_i = (l1_i - indicePositionInitialeRotors[0] - nbRotation[0] + (26*nbRotation[0]))%26;
+  l1_i = (l1_i - indicePositionInitialeRotors[0] - nbRotation[0] + (26*30))%26;
   l1_i = permutation_fiche(fiche1, fiche2, l1_i);
 
   return(l1_i);
